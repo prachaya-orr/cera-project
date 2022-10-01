@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import React from 'react';
 
 function SearchComponent() {
@@ -11,7 +11,7 @@ function SearchComponent() {
           placeholder="Search..."
         />
         <button className="px-4 text-whiteborder-l rounded text-ge ">
-          <Icon icon="carbon:search" width="20" />
+          <ShoppingCartOutlinedIcon />
         </button>
       </div>
     </div>

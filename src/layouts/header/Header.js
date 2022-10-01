@@ -1,6 +1,5 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
 import SearchComponent from '../../components/SearchComponent';
 
 function Header() {
@@ -17,11 +16,11 @@ function Header() {
           </Navbar.Brand>
           <div className="flex md:order-2">
             <SearchComponent />
-            <Icon
+            {/* <Icon
               className=" relative -left-6 -bottom-2.5"
               icon="carbon:shopping-cart"
               width="24"
-            />
+            /> */}
             {isLoged ? (
               <Dropdown
                 arrowIcon={true}
@@ -91,7 +90,7 @@ function Header() {
 
             <Navbar.Toggle />
           </div>
-          <div className='translate-x-6'>
+          <div className='-translate-x-9 '>
             <Navbar.Collapse>
               <Navbar.Link href="/navbars">HOME</Navbar.Link>
               <Navbar.Link href="/navbars">ABOUT CERA</Navbar.Link>
