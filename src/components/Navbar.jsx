@@ -1,6 +1,5 @@
 import React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+// import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
@@ -11,38 +10,54 @@ const NavBar = () => {
         style={{ borderBottom: '1px solid #BDBDBD' }}
       >
         <div className="flex flex-row items-center p-0 gap-[64px] w-[387px] h-[29px]">
-          <span className="font-bold text-[24px] leading-[29px] w-[52px] h-[29px]">
-            cera
-          </span>
+          <Link to={'/'}>
+            <span className="font-bold text-[24px] leading-[29px] w-[52px] h-[29px]">
+              cera
+            </span>
+          </Link>
           <ul className="flex flex-row items-start p-0 gap-6 w-[271px] h-[17px] list-none m-0 ">
             <li>
-              <Link to={'/'}>SHOP</Link>
+              <Link to={'/'}>HOME</Link>
             </li>
             <li>
-              <Link to={'/'}>ABOUT&nbsp;CERA</Link>
+              <Link to={'/product'}>SHOP</Link>
             </li>
             <li>
-              <Link to={'/'}>CONTACT&nbsp;US</Link>
+              <Link to={'/aboutCera'}>ABOUT&nbsp;CERA</Link>
+            </li>
+            <li>
+              <Link to={'/contactUs'}>CONTACT&nbsp;US</Link>
             </li>
           </ul>
         </div>
         <div className="flex p-0 ">
           <div className="flex items-center gap-6">
-            <form className="relative bg-[#F9F9F9]  ">
+            <form className="relative bg-[#F9F9F9] rounded-full ">
               <input
                 type="text"
                 name=""
                 placeholder="search..."
-                className="bg-[#F9F9F9] border-0"
+                className="bg-[#F9F9F9] border-0 rounded-full w-72"
               />
               <i className="fa-solid fa-magnifying-glass absolute right-2 top-1/2 -translate-y-1/2 text-slate-400"></i>
             </form>
             <div className="flex flex-row items-center gap-[16px]">
-              <ShoppingCartOutlinedIcon fontSize="small" />
-              <div className="flex items-center gap-[23px]">
-                <i className="fa-regular fa-user"></i>
-                <span className='font-bold'>Login</span>
-              </div>
+              <Link to={'/cart'}>
+                <div className="relative">
+                  <i class="fa fa-shopping-cart text-xl" aria-hidden="true"></i>
+                  <div className="absolute right-0 top-0 bg-orange-400 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/2 text-white w-fit px-[4px] h-4">
+                    3
+                  </div>
+                </div>
+                {/* <CartBadge /> */}
+                {/* <ShoppingCartOutlinedIcon fontSize="small" /> */}
+              </Link>
+              <Link to={'/login'}>
+                <div className="flex items-center gap-[23px]">
+                  <i className="fa-regular fa-user text-[21px]"></i>
+                  <span className="font-bold">Login</span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
