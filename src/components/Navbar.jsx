@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <>
       <div
-        className="Container flex flex-row justify-between items-center px-12 py-4 gap-[155px] h-[72px] w-2xl "
+        className="Container flex flex-row justify-between items-center px-12 py-4 gap-[155px] h-[72px] w-full "
         style={{ borderBottom: '1px solid #BDBDBD' }}
       >
         <div className="flex flex-row items-center p-0 gap-[64px] w-[387px] h-[29px]">
@@ -44,7 +44,7 @@ const NavBar = () => {
             <div className="flex flex-row items-center gap-[16px]">
               <Link to={'/cart'}>
                 <div className="relative">
-                  <i class="fa fa-shopping-cart text-xl" aria-hidden="true"></i>
+                  <i className="fa fa-shopping-cart text-xl" aria-hidden="true"></i>
                   <div className="absolute right-0 top-0 bg-orange-400 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/2 text-white w-fit px-[4px] h-4">
                     3
                   </div>

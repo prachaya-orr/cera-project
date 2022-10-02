@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .lg-subtitle-1{
+        @apply font-[600] text-[18px] leading-[22px]
+    }
+    .lg-h3{
+        @apply font-[500] text-[36px] leading-[44px] tracking-[-0.02em]
+    }
+    .lg-button-large{
+        @apply font-[600] text-[16px] leading-[19px] text-center
+    }
+    .lg-button-medium{
+        @apply font-[500] text-[14px] leading-[17px] uppercase
+    }
+}

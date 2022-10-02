@@ -1,9 +1,7 @@
-import React from 'react'
+import AuthForm from '../features/auth/AuthForm';
 
 function LoginPage() {
-  return (
-    <div>LoginPage</div>
-  )
+  return <AuthForm />;
 }
 
-export default LoginPage
+export default LoginPage;
