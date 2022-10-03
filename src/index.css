@@ -5,6 +5,12 @@
 @layer components{
     .lg-subtitle-1{
         @apply font-[600] text-[18px] leading-[22px]
+    } 
+    .lg-subtitle-2{
+        @apply font-[600] text-[16px] leading-[19px] tracking-[-0.02em]
+    }
+    .lg-subtitle-3{
+        @apply font-[400] text-[18px] leading-[22px]
     }
     .lg-h3{
         @apply font-[500] text-[36px] leading-[44px] tracking-[-0.02em]
@@ -14,5 +20,11 @@
     }
     .lg-button-medium{
         @apply font-[500] text-[14px] leading-[17px] uppercase
+    }
+    .lg-body-1{
+        @apply font-[400] text-[16px] leading-[19px]
+    }
+    .border-1{
+        @apply border-[1px] border-black
     }
 }
