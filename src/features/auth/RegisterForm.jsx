@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLoading } from '../../contexts/LoadingContext';
 import { validateRegister } from '../../validations/userValidate';
 
 function RegisterForm() {
   const { register } = useAuth();
+  const { startLoading, stopLoading } = useLoading();
 
   const [input, setInput] = useState({
     firstName: '',
@@ -13,6 +16,8 @@ function RegisterForm() {
     password: '',
     confirmPassword: '',
   });
+  
+  const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -25,8 +30,8 @@ function RegisterForm() {
       return toast.error(error.message);
     }
     try {
+      startLoading();
       await register(input);
-      toast.success('success register');
       setInput({
         firstName: '',
         lastName: '',
@@ -34,8 +39,12 @@ function RegisterForm() {
         password: '',
         confirmPassword: '',
       });
+      toast.success('success register');
+      navigate('/')
     } catch (err) {
       toast.error(err.response.data.message);
+    } finally {
+      stopLoading();
     }
   };
 
