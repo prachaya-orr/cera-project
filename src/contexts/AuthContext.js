@@ -10,12 +10,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const register = async (input) => {
-    try {
-      const res = await authService.register(input);
-      toast.success('success register');
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
+    const res = await authService.register(input); 
   };
 
   return (
@@ -29,3 +24,4 @@ export const useAuth = () => {
 };
 
 export default AuthContextProvider;
+ 

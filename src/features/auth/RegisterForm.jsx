@@ -24,7 +24,19 @@ function RegisterForm() {
     if (error) {
       return toast.error(error.message);
     }
-    register(input);
+    try {
+      await register(input);
+      toast.success('success register');
+      setInput({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
 
   return (

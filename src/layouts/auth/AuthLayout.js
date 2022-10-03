@@ -11,6 +11,7 @@ function AuthLayout() {
       <Container>
         <Outlet />
       </Container>
+      {/* <Footer/> */}
     </>
   );
 }

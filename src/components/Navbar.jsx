@@ -6,10 +6,10 @@ const NavBar = () => {
   return (
     <>
       <div
-        className="Container flex flex-row justify-between items-center px-12 py-4 gap-[155px] h-[72px] w-full "
+        className="Container flex flex-row justify-around items-center px-12 py-4 gap-[155px] h-[72px] w-100% "
         style={{ borderBottom: '1px solid #BDBDBD' }}
       >
-        <div className="flex flex-row items-center p-0 gap-[64px] w-[387px] h-[29px]">
+        <div className="flex flex-row  justify-around items-center p-0 gap-[64px] w-[387px] h-[29px]">
           <Link to={'/'}>
             <span className="font-bold text-[24px] leading-[29px] w-[52px] h-[29px]">
               cera
