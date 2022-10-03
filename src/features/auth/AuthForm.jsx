@@ -18,7 +18,7 @@ function AuthForm() {
           <RegisterForm />
         </div>
         <div className="w-100 h-[392px] bg-apple mt-[108px]"> footer </div>
-      </div>
+      </div> 
     </>
   );
 }

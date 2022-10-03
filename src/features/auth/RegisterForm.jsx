@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLoading } from '../../contexts/LoadingContext';
@@ -17,7 +16,6 @@ function RegisterForm() {
     confirmPassword: '',
   });
   
-  const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -40,7 +38,6 @@ function RegisterForm() {
         confirmPassword: '',
       });
       toast.success('success register');
-      navigate('/')
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {
