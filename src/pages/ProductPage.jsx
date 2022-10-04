@@ -3,7 +3,7 @@ import CardProduct from '../components/CardProduct';
 
 function ProductPage() {
   return (
-    <div className="flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12">
+    <div className="flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]">
       <div className="flex flex-row items-start py-0 px-[88px] gap-[10px]">
         <p className="lg-subtitle-1">Home &gt;</p>
         <p>Shop</p>

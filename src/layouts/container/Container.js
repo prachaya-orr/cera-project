@@ -1,5 +1,5 @@
 function Container({ children }) {
-  return <div className="min-vh-100">{children}</div>;
+  return <div className="min-h-screen">{children}</div>;
 }
 
 export default Container;

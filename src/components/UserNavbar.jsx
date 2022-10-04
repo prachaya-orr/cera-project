@@ -1,9 +1,11 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const UserNavbar = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -46,28 +48,32 @@ const UserNavbar = () => {
             <div className="flex flex-row items-center gap-[16px]">
               <Link to={'/cart'}>
                 <div className="relative">
-                  <i
+                  {/* <i
                     className="fa fa-shopping-cart text-xl"
                     aria-hidden="true"
-                  ></i>
-                  <div className="absolute right-0 top-0 bg-orange-400 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/2 text-white w-fit px-[4px] h-4">
+                  ></i>  */}
+                  <span className="material-symbols-outlined translate-y-[2px]">shopping_cart</span>
+                  <div className="absolute right-0 top-0 bg-orange-400 opacity-80 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/3 text-white w-fit px-[4px] h-4">
                     3
                   </div>
                 </div>
               </Link>
-              <div className="flex items-center gap-[22px]">
+              <div className="flex items-center gap-[24px]">
                 <Link to={'/myWishlist'}>
-                  <i className="fa-regular fa-heart text-[21px] pl-2"></i>
+                  <i className="fa-regular fa-heart text-[21px] px-1 "></i>
                 </Link>
                 <Link to={'/account'}>
-                  <span className="font-bold">User.firstName</span>
+                  <span className="font-bold -translate-x-6">
+                    {user.firstName}
+                  </span>
                 </Link>
                 <button
-                  className="font-bold -ml-3 bg-red-400 px-2 py-1 rounded-full text-white "
+                  className="font-bold -ml-3 bg-red-400 px-2 py-1 rounded-full text-white translate-x-24"
                   onClick={logout}
                 >
                   Log&nbsp;out
                 </button>
+               
               </div>
             </div>
           </div>

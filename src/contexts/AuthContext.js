@@ -36,14 +36,16 @@ function AuthContextProvider({ children }) {
 
   const register = async (input) => {
     const res = await authService.register(input);
-    setUser(true);
     addAccessToken(res.data.token);
+    await getMe()
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const login = async (input) => {
     const res = await authService.login(input);
-    setUser(true);
     addAccessToken(res.data.token);
+    await getMe()
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const logout = async () => {
