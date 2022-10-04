@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import UserNavbar from '../../components/UserNavbar';
+import Navbar from '../../components/Navbar';
 import Container from '../container/Container';
 
-function AuthLayout() {
+function GuestLayout() {
   return (
     <>
-      <UserNavbar />
+      <Navbar />
       <Container>
         <Outlet />
       </Container>
@@ -13,4 +13,4 @@ function AuthLayout() {
   );
 }
 
-export default AuthLayout;
+export default GuestLayout;

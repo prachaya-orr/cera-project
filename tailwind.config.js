@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   content: [
@@ -22,7 +22,17 @@ module.exports = {
         emerald: colors.emerald,
         indigo: colors.indigo,
         yellow: colors.yellow,
-        apple: '#FEE5E0'
+        apple: '#FEE5E0',
+      },
+      screens: {
+        sm: '576px',
+        // => @media (min-width: 576px) { ... }
+
+        md: '960px',
+        // => @media (min-width: 960px) { ... }
+
+        lg: '1440px',
+        // => @media (min-width: 1440px) { ... }
       },
     },
   },

@@ -27,4 +27,7 @@
     .border-1{
         @apply border-[1px] border-black
     }
+    .lg-body-h4{
+        @apply font-[600] text-[28px] leading-[34px]
+    }
 }

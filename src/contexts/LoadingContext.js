@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-import { useState } from 'react';
-import { createContext } from 'react';
+import { useContext, useState, createContext } from 'react';
 
 const LoadingContext = createContext();
 

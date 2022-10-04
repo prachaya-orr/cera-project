@@ -1,8 +1,10 @@
 import React from 'react';
-// import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-const Navbar = () => {
+const UserNavbar = () => {
+  const { logout } = useAuth();
+
   return (
     <>
       <div
@@ -35,7 +37,7 @@ const Navbar = () => {
             <form className="relative bg-[#F9F9F9] rounded-full ">
               <input
                 type="text"
-                name=""
+                name="searchBar"
                 placeholder="search..."
                 className="bg-[#F9F9F9] border-0 rounded-full w-72"
               />
@@ -44,20 +46,29 @@ const Navbar = () => {
             <div className="flex flex-row items-center gap-[16px]">
               <Link to={'/cart'}>
                 <div className="relative">
-                  <i className="fa fa-shopping-cart text-xl" aria-hidden="true"></i>
+                  <i
+                    className="fa fa-shopping-cart text-xl"
+                    aria-hidden="true"
+                  ></i>
                   <div className="absolute right-0 top-0 bg-orange-400 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/2 text-white w-fit px-[4px] h-4">
                     3
                   </div>
                 </div>
-                {/* <CartBadge /> */}
-                {/* <ShoppingCartOutlinedIcon fontSize="small" /> */}
               </Link>
-              <Link to={'/login'}>
-                <div className="flex items-center gap-[23px] pl-2">
-                  <i className="fa-regular fa-user text-[21px]"></i>
-                  <span className="font-bold">Login</span>
-                </div>
-              </Link>
+              <div className="flex items-center gap-[22px]">
+                <Link to={'/myWishlist'}>
+                  <i className="fa-regular fa-heart text-[21px] pl-2"></i>
+                </Link>
+                <Link to={'/account'}>
+                  <span className="font-bold">User.firstName</span>
+                </Link>
+                <button
+                  className="font-bold -ml-3 bg-red-400 px-2 py-1 rounded-full text-white "
+                  onClick={logout}
+                >
+                  Log&nbsp;out
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -66,4 +77,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default UserNavbar;

@@ -48,7 +48,7 @@ function LoginForm() {
         <div className="lg-subtitle-1">Password</div>
         <div className="relative">
           <input
-            type="text"
+            type="password"
             className="w-[460px]"
             name="password"
             value={input.password}
