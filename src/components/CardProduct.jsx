@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CardProduct() {
   return (
     <>
       <div className="flex flex-col justify-center items-start p-0 gap-4 w-[298px] h-[510px]">
-        <img
-          src="https://i.postimg.cc/gkbX0Qdm/use1.webp"
-          alt="use1"
-          className="w-[298px] h-[400px] bg-slate-200"
-        />
+        <Link to="/shop/:id">
+          <img
+            src="https://i.postimg.cc/gkbX0Qdm/use1.webp"
+            alt="use1"
+            className="w-[298px] h-[400px] bg-slate-200"
+          />
+        </Link>
         <div className="flex flex-col justify-start p-0 gap-2 w-[298px] h-[94px]">
           <div className="felx flex-col items-start p-0 gap-2">
             <p className="lg-subtitle-2">Men's Cera Scrub Tops</p>

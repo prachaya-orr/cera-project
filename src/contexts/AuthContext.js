@@ -13,6 +13,7 @@ const AuthContext = createContext();
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -29,6 +30,13 @@ function AuthContextProvider({ children }) {
     fetchMe();
   }, []);
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const getMe = async () => {
     const res = await authService.getMe();
     setUser(res.data.user);
@@ -37,14 +45,14 @@ function AuthContextProvider({ children }) {
   const register = async (input) => {
     const res = await authService.register(input);
     addAccessToken(res.data.token);
-    await getMe()
+    await getMe();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const login = async (input) => {
     const res = await authService.login(input);
     addAccessToken(res.data.token);
-    await getMe()
+    await getMe();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -55,7 +63,16 @@ function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, register, login, logout, initialLoading }}
+      value={{
+        user,
+        register,
+        login,
+        logout,
+        initialLoading,
+        isOpen,
+        openModal,
+        closeModal,
+      }}
     >
       {children}
     </AuthContext.Provider>

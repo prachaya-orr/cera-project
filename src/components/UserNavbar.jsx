@@ -1,11 +1,10 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import ModalPromotion from './Modal/ModalPromotion';
 
 const UserNavbar = () => {
-  const { logout, user } = useAuth();
-  useEffect(() => {}, []);
+  const { logout, user, isOpen, openModal } = useAuth();
 
   return (
     <>
@@ -24,7 +23,7 @@ const UserNavbar = () => {
               <Link to={'/'}>HOME</Link>
             </li>
             <li>
-              <Link to={'/product'}>SHOP</Link>
+              <Link to={'/shop'}>SHOP</Link>
             </li>
             <li>
               <Link to={'/aboutCera'}>ABOUT&nbsp;CERA</Link>
@@ -52,7 +51,9 @@ const UserNavbar = () => {
                     className="fa fa-shopping-cart text-xl"
                     aria-hidden="true"
                   ></i>  */}
-                  <span className="material-symbols-outlined translate-y-[2px]">shopping_cart</span>
+                  <span className="material-symbols-outlined translate-y-[2px]">
+                    shopping_cart
+                  </span>
                   <div className="absolute right-0 top-0 bg-orange-400 opacity-80 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/3 text-white w-fit px-[4px] h-4">
                     3
                   </div>
@@ -63,17 +64,39 @@ const UserNavbar = () => {
                   <i className="fa-regular fa-heart text-[21px] px-1 "></i>
                 </Link>
                 <Link to={'/account'}>
-                  <span className="font-bold -translate-x-6">
+                  <span className="font-bold -translate-x-6 flex-nowrap ">
                     {user.firstName}
                   </span>
                 </Link>
+                {user.isAdmin ? (
+                  <Link to={'/admin'}>
+                    <button className="top-0 right-0 font-bold -ml-3 bg-red-700 hover:bg-black px-2 py-1 rounded-full text-white translate-x-24">
+                      Admin
+                    </button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
+                {user.isAdmin ? (
+                  <></>
+                ) : (
+                  <>
+                    <button
+                      className="top-0 right-0 font-bold -ml-3 bg-red-700 hover:bg-black  px-2 py-1 rounded-full text-white translate-x-24"
+                      onClick={openModal}
+                    >
+                      Promotion!
+                    </button>
+                    {isOpen && <ModalPromotion />}{' '}
+                  </>
+                )}
+
                 <button
-                  className="font-bold -ml-3 bg-red-400 px-2 py-1 rounded-full text-white translate-x-24"
+                  className="top-0 right-0 font-bold -ml-3 bg-red-700  hover:bg-black px-2 py-1 rounded-full text-white translate-x-24"
                   onClick={logout}
                 >
                   Log&nbsp;out
                 </button>
-               
               </div>
             </div>
           </div>

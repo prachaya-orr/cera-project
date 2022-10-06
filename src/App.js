@@ -15,7 +15,7 @@ function App() {
       <Router />
       <ToastContainer
         position="bottom-right"
-        theme="colored"
+        theme="dark"
         autoClose="2500"
         pauseOnHover
       />

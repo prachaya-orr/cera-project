@@ -12,6 +12,9 @@
     .lg-subtitle-3{
         @apply font-[400] text-[18px] leading-[22px]
     }
+    .lg-h2{
+        @apply font-[600] text-[48px] leading-[58px] tracking-[-0.02em]
+    }
     .lg-h3{
         @apply font-[500] text-[36px] leading-[44px] tracking-[-0.02em]
     }
