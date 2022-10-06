@@ -10,7 +10,7 @@ import ContactUsPage from '../pages/ContactUsPage';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import ShopPage from '../pages/ShopPage';
-import CartPage from '../pages/ShopPage';
+import CartPage from '../pages/CartPage';
 import Wishlist from '../pages/Wishlist';
 import AddProductPage from '../pages/Admin/AddProductPage';
 import ProductPage from '../pages/ProductPage';

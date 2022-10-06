@@ -9,7 +9,7 @@ function ProductPage() {
     <div className="flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]">
       <div className="flex flex-row items-start py-0 px-[88px] gap-[10px]">
         <p className="lg-subtitle-1">Home &gt;</p>
-        <p>Shop</p>
+        <p>My Cart</p>
       </div>
       <div className="flex flex-col items-start p-0 gap-6 w-[100vh]">
         <div className="flex flex-col items-center p-0 gap-[108px] w-[100vw]">
