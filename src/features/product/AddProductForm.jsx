@@ -36,7 +36,7 @@ function AddProductForm() {
 
   const inputEl = useRef();
   return (
-    <div className="flex justify-center mt-8 w-[70vw]">
+    <div className="flex justify-center w-[70vw]">
       <div className="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
         <div className="m-4">
           <label className="inline-block mb-2 text-gray-500">
@@ -81,12 +81,12 @@ function AddProductForm() {
           </div>
           <form
             onSubmit={handleSubmitForm}
-            className="flex flex-col items-start mt-7 s p-0 gap-[16px] "
+            className="flex flex-col items-start  p-0 gap-[16px]  "
           >
             <div className="lg-subtitle-1"> Product Name</div>
             <input
               type="text"
-              className="w-full"
+              className="w-full rounded-md"
               name="productName"
               value={input.productName}
               onChange={handleChangeInput}
@@ -94,7 +94,7 @@ function AddProductForm() {
             <div className="lg-subtitle-1">Size</div>
             <div className="relative w-full">
               <select
-                className="block p-2 mb-6 w-full  h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border "
+                className="block p-2 mb-6 w-full  h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border rounded-md "
                 name="size"
                 onChange={handleChangeInput}
               >
@@ -109,7 +109,7 @@ function AddProductForm() {
               <div className="lg-subtitle-1"> Unit Price - THB</div>
               <input
                 type="text"
-                className="w-full"
+                className="w-full rounded-md"
                 name="unitPrice"
                 value={input.unitPrice}
                 onChange={handleChangeInput}
@@ -118,7 +118,13 @@ function AddProductForm() {
           </form>
         </div>
         <div className="flex justify-center p-2 space-x-4 ">
-          <button className="px-4 py-2 text-white bg-red-500 rounded shadow-xl">
+          <button
+            className="px-4 py-2 text-white bg-red-500 rounded shadow-xl"
+            onClick={() => {
+              setFile(null);
+              inputEl.current.value = null;
+            }}
+          >
             Cancel
           </button>
           <button className="px-4 py-2 text-white bg-green-500 rounded shadow-xl">
@@ -126,27 +132,15 @@ function AddProductForm() {
           </button>
         </div>
       </div>
-      <div className=' w-[80vh] flex justify-center'>
+      <div
+        className={`${
+          file ? '' : 'hidden'
+        } w-[80vh] flex justify-center rounded-md shadow-xl`}
+      >
         <img
-          src={
-            file ? (
-              URL.createObjectURL(file)
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-12 h-12 text-gray-400 group-hover:text-gray-600"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )
-          }
+          src={file ? URL.createObjectURL(file) : ''}
           alt="productImage"
+          className="rounded-md"
         />
       </div>
     </div>
