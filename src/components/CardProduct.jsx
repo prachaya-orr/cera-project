@@ -22,12 +22,13 @@ function CardProduct() {
               Add to cart
             </button>
             <form onSubmit={(e) => e.preventDefault()}>
-              <select className="block p-2 mb-6 w-[65px] h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border ">
+              <select
+                defaultValue={'S'}
+                className="block p-2 mb-6 w-[65px] h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border "
+              >
                 <option value="XS">XS</option>
                 <option value="S">S</option>
-                <option defaultValue value="M">
-                  M
-                </option>
+                <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
               </select>
