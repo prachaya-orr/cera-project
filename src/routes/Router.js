@@ -36,7 +36,7 @@ function Router() {
           {user.isAdmin ? (
             <>
               <Route path="/admin" element={<Admin />} />
-              <Route path="/addProduct" element={<AddProductPage />} />
+              <Route path="/admin/createProduct" element={<AddProductPage />} />
             </>
           ) : (
             <>

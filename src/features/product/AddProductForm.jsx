@@ -1,32 +1,46 @@
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLoading } from '../../contexts/LoadingContext';
+import { useProduct } from '../../contexts/ProductContext';
 
 function AddProductForm() {
+  const { createProduct } = useProduct();
+
   const [input, setInput] = useState({
     productName: '',
     size: '',
     unitPrice: '',
-    // productImage: {},
+    color: '',
+    countStock: '',
+    imageUrl: '',
   });
+
+  console.log(input.imageUrl);
 
   const [file, setFile] = useState(null);
 
   const { startLoading, stopLoading } = useLoading();
 
-  const formData = new FormData();
-  formData.append('imageUrl', file);
+  // const formData = new FormData();
+  // formData.append('imageUrl', file);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitForm = async (e) => {
+  const handleClickCreate = async (e) => {
     e.preventDefault();
     try {
       startLoading();
-      // await login(input);
-      toast.success('success login');
+      const formData = new FormData();
+      formData.append('productName', input.productName);
+      formData.append('size', input.size);
+      formData.append('unitPrice', input.unitPrice);
+      formData.append('color', input.color);
+      formData.append('countStock', input.countStock);
+      formData.append('imageUrl', input.imageUrl);
+      await createProduct(formData);
+      toast.success('success create');
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {
@@ -67,21 +81,22 @@ function AddProductForm() {
             </label>
             <input
               type="file"
-              name="productImage"
+              name="imageUrl"
               className="hidden"
               ref={inputEl}
               // multiple
               onChange={(e) => {
                 if (e.target.files[0]) {
+                  // console.log(e.target.files[0]);
                   setFile(e.target.files[0]);
-                  // setInput({ ...input, [e.target.name]: e.target.files[0] });
+                  setInput({ ...input, [e.target.name]: e.target.files[0] });
                 }
               }}
             />
           </div>
           <form
-            onSubmit={handleSubmitForm}
-            className="flex flex-col items-start  p-0 gap-[16px]  "
+            onSubmit={(e) => e.preventDefault()}
+            className="flex flex-col items-start  p-0  gap-2 "
           >
             <div className="lg-subtitle-1"> Product Name</div>
             <input
@@ -94,24 +109,50 @@ function AddProductForm() {
             <div className="lg-subtitle-1">Size</div>
             <div className="relative w-full">
               <select
-                className="block p-2 mb-6 w-full  h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border rounded-md "
+                className="block p-2 mb-3 w-full  h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border rounded-md "
                 name="size"
+                value={input.size}
                 onChange={handleChangeInput}
               >
+                <option value="" disabled>
+                  Select Size
+                </option>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
-                <option defaultValue value="M">
-                  M
-                </option>
+                <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
+              </select>
+              <div className="lg-subtitle-1">Color</div>
+              <select
+                name="color"
+                value={input.color}
+                onChange={handleChangeInput}
+                className="block p-2 mb-3  w-full  h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border rounded-md"
+              >
+                <option value="" disabled>
+                  Select Color
+                </option>
+                <option value="BLUE">BLUE</option>
+                <option value="GREEN">GREEN</option>
+                <option value="NAVY">NAVY</option>
+                <option value="PINK">PINK</option>
+                <option value="RED">RED</option>
               </select>
               <div className="lg-subtitle-1"> Unit Price - THB</div>
               <input
                 type="text"
-                className="w-full rounded-md"
+                className="w-full rounded-md mb-3"
                 name="unitPrice"
                 value={input.unitPrice}
+                onChange={handleChangeInput}
+              />
+              <div className="lg-subtitle-1"> Quantity</div>
+              <input
+                type="text"
+                className="w-full rounded-md"
+                name="countStock"
+                value={input.countStock}
                 onChange={handleChangeInput}
               />
             </div>
@@ -127,7 +168,10 @@ function AddProductForm() {
           >
             Cancel
           </button>
-          <button className="px-4 py-2 text-white bg-green-500 rounded shadow-xl">
+          <button
+            className="px-4 py-2 text-white bg-green-500 rounded shadow-xl"
+            onClick={handleClickCreate}
+          >
             Create
           </button>
         </div>

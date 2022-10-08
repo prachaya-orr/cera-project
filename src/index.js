@@ -7,16 +7,19 @@ import './index.css';
 import App from './App';
 import AuthContextProvider from './contexts/AuthContext';
 import LoadingContextProvider from './contexts/LoadingContext';
+import ProductContextProvider from './contexts/ProductContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <LoadingContextProvider>
-        <AuthContextProvider>
+  <BrowserRouter>
+    <LoadingContextProvider>
+      <AuthContextProvider>
+        <ProductContextProvider>
           <App />
-        </AuthContextProvider>
-      </LoadingContextProvider>
-    </BrowserRouter>
-  // </React.StrictMode> 
+        </ProductContextProvider>
+      </AuthContextProvider>
+    </LoadingContextProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

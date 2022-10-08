@@ -1,0 +1,44 @@
+import { useContext, createContext, useState, useEffect } from 'react';
+import * as adminApi from '../api/adminApi';
+import * as productApi from '../api/productApi';
+
+const ProductContext = createContext();
+
+function ProductContextProvider({ children }) {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  const fetchAllProducts = async () => {
+    try {
+      const res = await productApi.getAllProducts();
+      setProducts(res.data.products);
+    } catch (err) {
+      console.log('Fetch Products Error');
+    }
+  };
+  
+  const createProduct = async (input) => {
+    try {
+      await adminApi.createProduct(input);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <ProductContext.Provider
+      value={{ products, createProduct, fetchAllProducts }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
+}
+
+export const useProduct = () => {
+  return useContext(ProductContext);
+};
+
+export default ProductContextProvider;

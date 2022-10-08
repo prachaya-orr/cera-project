@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { createContext } from 'react';
 import * as authService from '../api/authApi';
+import * as userService from '../api/userApi';
 import {
   addAccessToken,
   getAccessToken,
@@ -61,6 +62,11 @@ function AuthContextProvider({ children }) {
     removeAccessToken();
   };
 
+  const updateUesr = async (input) => {
+    const res = await userService.updateUser(input);
+    setUser(res.data.user)
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -72,6 +78,7 @@ function AuthContextProvider({ children }) {
         isOpen,
         openModal,
         closeModal,
+        updateUesr
       }}
     >
       {children}
