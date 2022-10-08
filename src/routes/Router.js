@@ -17,7 +17,7 @@ import ProductPage from '../pages/ProductPage';
 
 function Router() {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
   return (
     <Routes>
       {user ? (

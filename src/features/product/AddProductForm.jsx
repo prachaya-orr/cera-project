@@ -15,7 +15,7 @@ function AddProductForm() {
     imageUrl: '',
   });
 
-  console.log(input.imageUrl);
+  // console.log(input.imageUrl);
 
   const [file, setFile] = useState(null);
 
@@ -40,11 +40,21 @@ function AddProductForm() {
       formData.append('countStock', input.countStock);
       formData.append('imageUrl', input.imageUrl);
       await createProduct(formData);
-      toast.success('success create');
+      setFile(null);
+      inputEl.current.value = null;
+      toast.success('success create Product');
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {
       stopLoading();
+      setInput({
+        productName: '',
+        size: '',
+        unitPrice: '',
+        color: '',
+        countStock: '',
+        imageUrl: '',
+      });
     }
   };
 
