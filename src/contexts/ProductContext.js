@@ -7,10 +7,6 @@ const ProductContext = createContext();
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState(null);
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
-
   const fetchAllProducts = async () => {
     try {
       const res = await productApi.getAllProducts();
@@ -19,14 +15,19 @@ function ProductContextProvider({ children }) {
       console.log('Fetch Products Error');
     }
   };
-  
+
   const createProduct = async (input) => {
     try {
       await adminApi.createProduct(input);
+      fetchAllProducts();
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   return (
     <ProductContext.Provider

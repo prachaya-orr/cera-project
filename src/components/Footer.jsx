@@ -111,8 +111,20 @@ function Footer() {
       </div>
       <div className="py-6 px-4 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
         <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
-          © 2022 <Link to="https://flowbite.com/">Flowbite™</Link>. All Rights
-          Reserved.
+          © 2022{' '}
+          <Link
+            to="/"
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+            }}
+          >
+            Cera™
+          </Link>
+          . All Rights Reserved.
         </span>
         <div className="flex mt-4 space-x-6 sm:justify-center md:mt-0">
           <Link

@@ -13,6 +13,7 @@ import ShopPage from '../pages/ShopPage';
 import CartPage from '../pages/CartPage';
 import Wishlist from '../pages/Wishlist';
 import AddProductPage from '../pages/Admin/AddProductPage';
+import UpdateProductPage from '../pages/Admin/UpdateProductPage';
 import ProductPage from '../pages/ProductPage';
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
             <>
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/createProduct" element={<AddProductPage />} />
+              <Route path="/admin/updateProduct" element={<UpdateProductPage />} />
             </>
           ) : (
             <>
