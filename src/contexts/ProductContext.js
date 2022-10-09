@@ -25,13 +25,22 @@ function ProductContextProvider({ children }) {
     }
   };
 
+  const deleteProduct = async (id) => {
+    try {
+      await adminApi.deleteProduct(id);
+      fetchAllProducts();
+    } catch (err) {
+      console.log('Delete Error!');
+    }
+  };
+
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
   return (
     <ProductContext.Provider
-      value={{ products, createProduct, fetchAllProducts }}
+      value={{ products, createProduct, fetchAllProducts, deleteProduct }}
     >
       {children}
     </ProductContext.Provider>

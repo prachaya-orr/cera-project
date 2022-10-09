@@ -1,7 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import EditProductTableRow from '../../components/adminUI/EditProductTableRow';
+import { useProduct } from '../../contexts/ProductContext';
 
 function EditProductForm() {
+  const { products } = useProduct();
+  const [isShow, setIsShow] = useState({});
+ 
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -31,35 +35,22 @@ function EditProductForm() {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th
-              scope="row"
-              className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Mock1
-            </th>
-            <td className="py-4 px-6">
-              <Link
-                to="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Show
-              </Link>
-            </td>
-            <td className="py-4 px-6">Sliver</td>
-            <td className="py-4 px-6">M</td>
-            <td className="py-4 px-6">฿ 2999</td>
-            <td className="py-4 px-6">
-              <Link
-                to="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </Link>
-            </td>
-            <td className="py-4 px-6">13</td>
-          </tr>
-          <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
+          {products?.map((product, index) => {
+           
+            return( <EditProductTableRow
+              key={index}
+              productName={product.productName}
+              imageUrl={product.ProductImages[0].imageUrl}
+              color={product.ProductLists[0].colorValue}
+              size={product.ProductLists[0].sizeValue}
+              unitPrice={product.unitPrice}
+              countStock={product.ProductLists[0].countStock}
+              onClick={e=>setIsShow({[index]:!isShow[index]})}
+              isShow={isShow[index]}
+              />
+          )})}
+
+          {/* <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
             <th
               scope="row"
               className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -170,7 +161,7 @@ function EditProductForm() {
               </Link>
             </td>
             <td className="py-4 px-6">13</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </div>

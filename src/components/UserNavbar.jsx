@@ -87,7 +87,7 @@ const UserNavbar = () => {
                     >
                       Promotion!
                     </button>
-                    {isOpen && <ModalPromotion />}{' '}
+                    {isOpen && <ModalPromotion />}
                   </>
                 )}
 

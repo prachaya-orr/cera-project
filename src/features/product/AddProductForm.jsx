@@ -31,22 +31,47 @@ function AddProductForm() {
   const handleClickCreate = async (e) => {
     e.preventDefault();
     try {
+      if (!input.imageUrl) {
+        return toast.error('Product Image is required.');
+      }
+
+      if (!input.productName) {
+        return toast.error('Product Name is required.');
+      }
+
+      if (!input.size) {
+        return toast.error('Size is required.');
+      }
+
+      if (!input.color) {
+        return toast.error('Color is required.');
+      }
+
+      if (!input.unitPrice) {
+        return toast.error('Unit Price is required.');
+      }
+
+      if (!input.countStock) {
+        return toast.error('Quantity is required.');
+      }
+
       startLoading();
       const formData = new FormData();
+      formData.append('imageUrl', input.imageUrl);
       formData.append('productName', input.productName);
       formData.append('size', input.size);
       formData.append('unitPrice', input.unitPrice);
       formData.append('color', input.color);
       formData.append('countStock', input.countStock);
-      formData.append('imageUrl', input.imageUrl);
       await createProduct(formData);
       setFile(null);
-      inputEl.current.value = null;
+      // inputEl.current.value = null;
       toast.success('success create Product');
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {
       stopLoading();
+      setFile(null);
       setInput({
         productName: '',
         size: '',
@@ -64,7 +89,7 @@ function AddProductForm() {
       <div className="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
         <div className="m-4">
           <label className="inline-block mb-2 text-gray-500">
-            Upload ProductImage (jpg,png,svg,jpeg)
+            Upload Product Image (jpg,png,svg,jpeg)
           </label>
           <div className="flex items-center justify-center w-full">
             <label
