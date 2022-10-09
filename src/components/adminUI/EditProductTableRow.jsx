@@ -1,10 +1,10 @@
-import React from 'react';
-// import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { useAuth } from '../../contexts/AuthContext';
-// import ModalImage from '../Modal/ModalImage';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import * as adminApi from '../../api/adminApi';
+import EditProductModal from './EditProductModal';
 
 function EditProductTableRow({
+  productId,
   productName,
   imageUrl,
   color,
@@ -12,9 +12,23 @@ function EditProductTableRow({
   unitPrice,
   countStock,
   onClick,
-  isShow
+  isShow,
 }) {
+  const [openModal, setOpenModal] = useState(false);
 
+  // const idEdit = async () => {
+  //   try {
+  //     const res = await adminApi.getOne(productId);
+  //     console.log(res.data);
+  //     const { thisProduct } = res.data;
+  //   } catch (err) {
+  //     toast.error(err.response?.data.message);
+  //   }
+  // };
+
+  // idEdit();
+
+  // const [item, setItem] = useState({});
 
   return (
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -30,24 +44,37 @@ function EditProductTableRow({
           onClick={onClick}
         >
           Show
-          <img
-            src={imageUrl}
-            alt="ProductImage"
-            className={` ${isShow ? '' : 'hidden'}  w-1/6 h-1/6 rounded`}
-          />
+          <div>
+            <img
+              src={imageUrl}
+              alt="ProductImage"
+              className={` ${isShow ? '' : 'hidden'}  w-1/6 h-1/6 rounded`}
+            />
+          </div>
         </div>
-        {/* {isOpen && <ModalImage imageUrl={imageUrl} productName={productName} />} */}
       </td>
       <td className="py-4 px-6">{color}</td>
       <td className="py-4 px-6">{size}</td>
       <td className="py-4 px-6">฿ {unitPrice}</td>
       <td className="py-4 px-6">
-        <Link
-          to="#"
+        <div
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          onClick={() => setOpenModal(!openModal)}
         >
           Edit
-        </Link>
+        </div>
+        {openModal && (
+          <EditProductModal
+            productId={productId}
+            imageUrl={imageUrl}
+            productName={productName}
+            size={size}
+            color={color}
+            unitPrice={unitPrice}
+            countStock={countStock}
+            onCancel={() => setOpenModal(false)}
+          />
+        ) }
       </td>
       <td className="py-4 px-6">{countStock}</td>
     </tr>

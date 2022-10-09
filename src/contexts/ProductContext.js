@@ -16,6 +16,14 @@ function ProductContextProvider({ children }) {
     }
   };
 
+  const getOne = async (id) => {
+    try {
+      const res = await adminApi.getOne(id);
+    } catch (err) {
+      console.log('getOne Error');
+    }
+  };
+
   const createProduct = async (input) => {
     try {
       await adminApi.createProduct(input);

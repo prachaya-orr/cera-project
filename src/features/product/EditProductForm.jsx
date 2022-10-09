@@ -5,7 +5,7 @@ import { useProduct } from '../../contexts/ProductContext';
 function EditProductForm() {
   const { products } = useProduct();
   const [isShow, setIsShow] = useState({});
- 
+
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -36,19 +36,21 @@ function EditProductForm() {
         </thead>
         <tbody>
           {products?.map((product, index) => {
-           
-            return( <EditProductTableRow
-              key={index}
-              productName={product.productName}
-              imageUrl={product.ProductImages[0].imageUrl}
-              color={product.ProductLists[0].colorValue}
-              size={product.ProductLists[0].sizeValue}
-              unitPrice={product.unitPrice}
-              countStock={product.ProductLists[0].countStock}
-              onClick={e=>setIsShow({[index]:!isShow[index]})}
-              isShow={isShow[index]}
+            return (
+              <EditProductTableRow
+                key={index}
+                productId={product.id}
+                productName={product.productName}
+                imageUrl={product.ProductImages[0].imageUrl}
+                color={product.ProductLists[0].colorValue}
+                size={product.ProductLists[0].sizeValue}
+                unitPrice={product.unitPrice}
+                countStock={product.ProductLists[0].countStock}
+                onClick={(e) => setIsShow({ [index]: !isShow[index] })}
+                isShow={isShow[index]}
               />
-          )})}
+            );
+          })}
 
           {/* <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
             <th
