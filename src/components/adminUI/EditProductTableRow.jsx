@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import * as adminApi from '../../api/adminApi';
+// import { useProduct } from '../../contexts/ProductContext';
 import EditProductModal from './EditProductModal';
 
 function EditProductTableRow({
@@ -16,6 +15,7 @@ function EditProductTableRow({
 }) {
   const [openModal, setOpenModal] = useState(false);
 
+  // const { getOne } = useProduct();
   // const idEdit = async () => {
   //   try {
   //     const res = await adminApi.getOne(productId);
@@ -55,7 +55,7 @@ function EditProductTableRow({
       </td>
       <td className="py-4 px-6">{color}</td>
       <td className="py-4 px-6">{size}</td>
-      <td className="py-4 px-6">฿ {unitPrice}</td>
+      <td className="py-4 px-6">฿{unitPrice}</td>
       <td className="py-4 px-6">
         <div
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -72,9 +72,9 @@ function EditProductTableRow({
             color={color}
             unitPrice={unitPrice}
             countStock={countStock}
-            onCancel={() => setOpenModal(false)}
+            onCloseModal={() => setOpenModal(false)}
           />
-        ) }
+        )}
       </td>
       <td className="py-4 px-6">{countStock}</td>
     </tr>

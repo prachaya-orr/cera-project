@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useProduct } from '../../contexts/ProductContext';
-import * as adminApi from '../../api/adminApi';
 
 function EditProductModal({
   productId,
@@ -13,12 +12,10 @@ function EditProductModal({
   color,
   unitPrice,
   countStock,
-  onCancel,
+  onCloseModal,
 }) {
-  console.log(imageUrl);
-
   // useEffect(() => {
-  // // console.log(productId);
+  console.log(productId);
 
   //   const idEdit = async () => {
   //     try {
@@ -43,8 +40,7 @@ function EditProductModal({
   //   idEdit();
   // }, [productId]);
 
-  const { createProduct } = useProduct();
-
+  const { fetchAllProducts, updateProduct, deleteProduct } = useProduct();
   const [input, setInput] = useState({
     productName: productName,
     size: size,
@@ -52,7 +48,12 @@ function EditProductModal({
     color: color,
     countStock: countStock,
     imageUrl: imageUrl,
+    oldImageUrl: imageUrl,
   });
+
+  // useEffect(() => {
+  //   console.log(input.imageUrl);
+  // }, [input]);
 
   const [file, setFile] = useState(null);
 
@@ -97,12 +98,38 @@ function EditProductModal({
       formData.append('unitPrice', input.unitPrice);
       formData.append('color', input.color);
       formData.append('countStock', input.countStock);
-      await createProduct(formData);
+      await updateProduct(productId, formData);
       setFile(null);
+      fetchAllProducts();
       // inputEl.current.value = null;
-      toast.success('success create Product');
+      onCloseModal();
+      toast.success('success update Product');
     } catch (err) {
       toast.error(err.response.data.message);
+    } finally {
+      stopLoading();
+      setFile(null);
+      setInput({
+        productName: '',
+        size: '',
+        unitPrice: '',
+        color: '',
+        countStock: '',
+        imageUrl: '',
+      });
+    }
+  };
+
+  const handleClickDelete = async (e) => {
+    try {
+      startLoading();
+      // console.log(productId);
+      await deleteProduct(productId);
+      toast.success('success delete');
+      onCloseModal();
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response?.data.message);
     } finally {
       stopLoading();
       setFile(null);
@@ -121,7 +148,7 @@ function EditProductModal({
   return (
     <div
       className="fixed top-0 left-0 bottom-0 right-0 bg-transparent backdrop-blur-[2px] flex flex-col justify-center items-center  "
-      onClick={onCancel}
+      onClick={onCloseModal}
     >
       <div className="flex justify-center w-[70vw]">
         <div
@@ -244,7 +271,7 @@ function EditProductModal({
               onClick={() => {
                 setFile(null);
                 inputEl.current.value = null;
-                onCancel();
+                onCloseModal();
               }}
             >
               Cancel
@@ -253,11 +280,11 @@ function EditProductModal({
               className="px-4 py-2 text-white bg-green-500 rounded shadow-xl"
               onClick={handleClickUpdate}
             >
-              Edit
+              Edit This Product
             </button>
             <button
               className="w-1/3 px-4 py-2 text-white bg-red-500 rounded shadow-xl"
-              onClick={handleClickUpdate}
+              onClick={handleClickDelete}
             >
               Delete This Product
             </button>

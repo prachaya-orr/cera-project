@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "../contexts/LoadingContext";
 import { toast } from "react-toastify";
-import * as adminService from "../api/adminApi";
+import * as adminService from "./adminApi";
 import { useAdmin } from "../contexts/AdminContext";
 
 function Mymodal({ open, close, id, prod }) {

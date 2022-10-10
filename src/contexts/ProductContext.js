@@ -1,10 +1,14 @@
 import { useContext, createContext, useState, useEffect } from 'react';
-import * as adminApi from '../api/adminApi';
+import * as adminService from '../api/adminApi';
 import * as productApi from '../api/productApi';
 
 const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
   const [products, setProducts] = useState(null);
 
   const fetchAllProducts = async () => {
@@ -18,15 +22,23 @@ function ProductContextProvider({ children }) {
 
   const getOne = async (id) => {
     try {
-      const res = await adminApi.getOne(id);
+      await adminService.getOne(id);
     } catch (err) {
       console.log('getOne Error');
     }
   };
 
+  const updateProduct = async (id, input) => {
+    try {
+      await adminService.updateProduct(id, input);
+    } catch (err) {
+      console.log('updateProduct Error');
+    }
+  };
+
   const createProduct = async (input) => {
     try {
-      await adminApi.createProduct(input);
+      await adminService.createProduct(input);
       fetchAllProducts();
     } catch (err) {
       console.log(err);
@@ -35,20 +47,23 @@ function ProductContextProvider({ children }) {
 
   const deleteProduct = async (id) => {
     try {
-      await adminApi.deleteProduct(id);
+      await adminService.deleteProduct(id);
       fetchAllProducts();
     } catch (err) {
       console.log('Delete Error!');
     }
   };
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
-
   return (
     <ProductContext.Provider
-      value={{ products, createProduct, fetchAllProducts, deleteProduct }}
+      value={{
+        products,
+        createProduct,
+        fetchAllProducts,
+        deleteProduct,
+        getOne,
+        updateProduct,
+      }}
     >
       {children}
     </ProductContext.Provider>
