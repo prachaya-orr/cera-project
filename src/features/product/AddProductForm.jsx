@@ -199,6 +199,14 @@ function AddProductForm() {
             onClick={() => {
               setFile(null);
               inputEl.current.value = null;
+              setInput({
+                productName: '',
+                size: '',
+                unitPrice: '',
+                color: '',
+                countStock: '',
+                imageUrl: '',
+              });
             }}
           >
             Cancel

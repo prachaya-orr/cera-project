@@ -7,7 +7,7 @@ function CardProduct({ productName, unitPrice, imageUrl }) {
   return (
     <>
       <div className="flex flex-col justify-center items-start p-0 gap-4 w-[298px] h-[510px]">
-        <Link to="/shop/:id">
+        <Link to="/shop">
           <img
             src={imageUrl}
             alt="use1"
