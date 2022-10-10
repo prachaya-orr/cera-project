@@ -1,8 +1,10 @@
 import React from 'react';
 // import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const Navbar = () => {
+  const { cartItems } = useCart();
   return (
     <>
       <div
@@ -52,7 +54,7 @@ const Navbar = () => {
                     shopping_cart
                   </span>
                   <div className="absolute right-0 top-0 bg-orange-400 opacity-80 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/3 text-white w-fit px-[4px] h-4">
-                    3
+                    {cartItems.length}
                   </div>
                 </div>
                 {/* <CartBadge /> */}

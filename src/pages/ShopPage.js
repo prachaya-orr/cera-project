@@ -4,7 +4,7 @@ import { useProduct } from '../contexts/ProductContext';
 
 function ShopPage() {
   const { products } = useProduct();
-
+  console.log(products);
   return (
     <div className="flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]">
       <div className="flex flex-row items-start py-0 px-[88px] gap-[10px]">
@@ -23,14 +23,20 @@ function ShopPage() {
             {/* close LogoName */}
             {/* CardProduct */}
             <div className=" container 2xl flex flex-row flex-wrap justify-center items-center py-0 px-[88px] gap-[24px]">
-              {products?.map((product) => (
-                <CardProduct
-                  key={product.id}
-                  productName={product.productName}
-                  unitPrice={product.unitPrice}
-                  imageUrl={product.ProductImages[0].imageUrl}
-                />
-              ))}
+              {products?.map((product) => {
+                return (
+                  <CardProduct
+                    key={product.id}
+                    id={product.id}
+                    productName={product.productName}
+                    unitPrice={product.unitPrice}
+                    color={product.ProductLists[0].colorValue}
+                    size={product.ProductLists[0].sizeValue}
+                    countStock={product.ProductLists[0].countStock}
+                    imageUrl={product.ProductImages[0].imageUrl}
+                  />
+                );
+              })}
             </div>
             {/* close CardProduct */}
           </div>

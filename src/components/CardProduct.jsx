@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useCart } from '../contexts/CartContext';
 
-function CardProduct({ productName, unitPrice, imageUrl }) {
-  const [size, setSize] = useState();
-  console.log(size);
+function CardProduct({
+  id,
+  productName,
+  unitPrice,
+  color,
+  size,
+  countStock,
+  imageUrl,
+}) {
+  const [sizeOrder, setSizeOrder] = useState(size);
+  const { addItemToCart } = useCart();
   return (
     <>
       <div className="flex flex-col justify-center items-start p-0 gap-4 w-[298px] h-[510px]">
@@ -22,15 +32,31 @@ function CardProduct({ productName, unitPrice, imageUrl }) {
             </p>
           </div>
           <div className="flex flex-row items-start p-0 gap-2 w-[298px] h-[40px]">
-            <button className="text-center lg-button-medium border-1 p-2 w-[202px] h-[40px] bg-gray-50 focus:ring-blue-500  hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <button
+              className="text-center lg-button-medium border-1 p-2 w-[202px] h-[40px] bg-gray-50 focus:ring-blue-500  hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onClick={() => {
+                addItemToCart({
+                  id,
+                  productName,
+                  unitPrice,
+                  color,
+                  size: sizeOrder,
+                  countStock,
+                  imageUrl,
+                });
+                toast.success('success add to cart');
+              }}
+            >
               Add to cart
             </button>
             <form onSubmit={(e) => e.preventDefault()}>
               <select
-                defaultValue={'M'}
-                value={size}
+                defaultValue={size}
+                value={sizeOrder}
                 className="block p-2 mb-6 w-[65px] h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border "
-                onChange={(e) => setSize(e.target.value)}
+                onChange={(e) => {
+                  setSizeOrder(e.target.value);
+                }}
               >
                 <option value="XS">XS</option>
                 <option value="S">S</option>
