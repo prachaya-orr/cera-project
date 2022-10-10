@@ -267,7 +267,7 @@ function EditProductModal({
           </div>
           <div className="flex justify-center p-2 space-x-4 ">
             <button
-              className="px-4 py-2 text-white bg-red-500 rounded shadow-xl"
+              className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded shadow-xl"
               onClick={() => {
                 setFile(null);
                 inputEl.current.value = null;
@@ -277,20 +277,23 @@ function EditProductModal({
               Cancel
             </button>
             <button
-              className="px-4 py-2 text-white bg-green-500 rounded shadow-xl"
+              className="font-[500] px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded shadow-xl"
               onClick={handleClickUpdate}
             >
               Edit This Product
             </button>
-            <button
-              className="w-1/3 px-4 py-2 text-white bg-red-500 rounded shadow-xl"
-              onClick={handleClickDelete}
-            >
-              Delete This Product
-            </button>
           </div>
+          <button
+            className="fixed bottom-3 right-1/2 translate-x-5 w-1/9 px-4 py-2 text-white bg-red-600 hover:bg-black rounded shadow-xl font-bold"
+            onClick={handleClickDelete}
+          >
+            Delete This Product
+          </button>
         </div>
-        <div className={`w-[80vh] flex justify-center rounded-md shadow-xl`}>
+        <div
+          className={`w-[80vh] flex justify-center rounded-md shadow-xl`}
+          onClick={(e) => e.stopPropagation()}
+        >
           <img
             src={file ? URL.createObjectURL(file) : imageUrl}
             alt="productImage"
