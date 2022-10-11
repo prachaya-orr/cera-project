@@ -5,7 +5,7 @@ import { useCart } from '../contexts/CartContext';
 
 function CartPage() {
   const { cartItems } = useCart();
-
+  console.log(cartItems);
   return (
     <div className="flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]">
       <div className="flex flex-row items-start py-0 px-[88px] gap-[10px]">
@@ -20,16 +20,16 @@ function CartPage() {
 
             <div className="flex flex-col items-center py-0 px-[176px] ">
               <div className="flex flex-col justify-center items-start p-0  gap-[24px]  w-[100%] border-1 border-gray-400"></div>
-              {cartItems?.map((cartItem) => (
+              {cartItems?.map((cartItem, index) => (
                 <CartItem
-                  key={cartItem.id}
-                  id={cartItem.id}
-                  productName={cartItem.productName}
-                  unitPrice={cartItem.unitPrice}
-                  color={cartItem.color}
-                  size={cartItem.size}
-                  countStock={cartItem.countStock}
-                  imageUrl={cartItem.imageUrl}
+                  key={index}
+                  productId={cartItem.productId}
+                  productName={cartItem.Product.productName}
+                  unitPrice={cartItem.Product.unitPrice}
+                  color={cartItem.Product.ProductLists[0].colorValue}
+                  size={cartItem.Product.ProductLists[0].sizeValue}
+                  countStock={cartItem.Product.ProductLists[0].countStock}
+                  imageUrl={cartItem.Product.ProductImages[0].imageUrl}
                 />
               ))}
 

@@ -1,22 +1,36 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { createCartApi, getCartApi } from '../api/cartApi';
 
 const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
-  const addItemToCart = (data) => {
-    setCartItems((prev) => [...prev, data]);
+  const addItemToCart = async (productId) => {
+   { const res = await createCartApi(productId);
+    // console.log(res);
+    const setCart = (prev) => setCartItems([...prev, res.data.JoinCartData]);
+    setCart(cartItems);}
+    console.log(cartItems);
   };
 
-  const removeCartItem = (courseId) => {
-    const cartItemFilter = cartItems.filter((item) => item.id !== courseId);
-    setCartItems(cartItemFilter);
+  const getCart = async () => {
+    const res = await getCartApi();
+    if (res.data.JoinCartData) {
+      setCartItems([...res.data.JoinCartData]);
+    }
   };
 
+  useEffect(() => {
+    try {
+      getCart();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   return (
     <CartContext.Provider
-      value={{ addItemToCart, cartItems, setCartItems, removeCartItem }}
+      value={{ addItemToCart, cartItems, setCartItems, getCart }}
     >
       {children}
     </CartContext.Provider>

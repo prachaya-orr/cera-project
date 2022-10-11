@@ -28,9 +28,9 @@ function ProductContextProvider({ children }) {
     }
   };
 
-  const updateProduct = async (id, input) => {
+  const updateProduct = async (productId, input) => {
     try {
-      await adminService.updateProduct(id, input);
+      await adminService.updateProduct(productId, input);
     } catch (err) {
       console.log('updateProduct Error');
     }
