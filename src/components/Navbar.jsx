@@ -53,8 +53,12 @@ const Navbar = () => {
                   <span className="material-symbols-outlined font-normal translate-y-[2px]">
                     shopping_cart
                   </span>
-                  <div className="absolute right-0 top-0 bg-orange-400 opacity-80 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/3 text-white w-fit px-[4px] h-4">
-                    {cartItems.length}
+                  <div
+                    className={`${
+                      cartItems.length > 0 ? '' : 'hidden'
+                    } absolute right-0 top-0   bg-orange-400 opacity-80 rounded-full text-[12px] text-center -translate-y-1/2 translate-x-1/3 text-white w-fit px-[4px] h-4`}
+                  >
+                    {cartItems.length > 0 ? cartItems.length : null}
                   </div>
                 </div>
                 {/* <CartBadge /> */}

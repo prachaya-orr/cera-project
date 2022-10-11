@@ -47,7 +47,7 @@ const UserNavbar = () => {
               <i className="fa-solid fa-magnifying-glass absolute right-2 top-1/2 -translate-y-1/2 text-slate-400"></i>
             </form>
             <div className="flex flex-row items-center gap-[16px]">
-              <Link to={'/cart'}>
+              <Link to={'/users/cart'}>
                 <div className="relative">
                   {/* <i
                     className="fa fa-shopping-cart text-xl"
@@ -81,7 +81,7 @@ const UserNavbar = () => {
                     </button>
                   </Link>
                 ) : (
-                  <></>
+                  ''
                 )}
                 {user.isAdmin ? (
                   <></>

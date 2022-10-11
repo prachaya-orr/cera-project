@@ -15,6 +15,7 @@ import Wishlist from '../pages/Wishlist';
 import AddProductPage from '../pages/Admin/AddProductPage';
 import EditProductPage from '../pages/Admin/EditProductPage';
 import ProductPage from '../pages/ProductPage';
+import GuestCartPage from '../pages/GuestCartPage';
 
 function Router() {
   const { user } = useAuth();
@@ -29,7 +30,7 @@ function Router() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/aboutCera" element={<AboutCera />} />
             <Route path="/contactUs" element={<ContactUsPage />} />
-            <Route path="/cart" element={<CartPage />} />
+            <Route path="/users/cart" element={<CartPage />} />
             <Route path="/myWishlist" element={<Wishlist />} />
             <Route path="/account" element={<Account />} />
             <Route path="*" element={<Navigate to="/" />} />
@@ -54,7 +55,7 @@ function Router() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/aboutCera" element={<AboutCera />} />
             <Route path="/contactUs" element={<ContactUsPage />} />
-            <Route path="/cart" element={<CartPage />} />
+            <Route path="/cart" element={<GuestCartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
 import { useCart } from '../contexts/CartContext';
 
@@ -37,9 +36,9 @@ function CartPage() {
                 <button className="bg-black text-white font-bold p-5">
                   Check Out
                 </button>
-                <Link to={'/shop'} className="text-gray-500 underline">
+                <div className="text-gray-500 underline">
                   CONTINUE TO SHOPPING
-                </Link>
+                </div>
               </div>
             </div>
           </div>

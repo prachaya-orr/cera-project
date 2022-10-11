@@ -12,7 +12,6 @@ function CardProduct({
   countStock,
   imageUrl,
 }) {
-  const [sizeOrder, setSizeOrder] = useState(size);
   const { addItemToCart } = useCart();
   return (
     <>
@@ -40,7 +39,7 @@ function CardProduct({
                   productName,
                   unitPrice,
                   color,
-                  size: sizeOrder,
+                  size,
                   countStock,
                   imageUrl,
                 });
@@ -50,20 +49,9 @@ function CardProduct({
               Add to cart
             </button>
             <form onSubmit={(e) => e.preventDefault()}>
-              <select
-                defaultValue={size}
-                value={sizeOrder}
-                className="block p-2 mb-6 w-[65px] h-[40px] border-1 text-sm text-gray-900 bg-gray-50 border "
-                onChange={(e) => {
-                  setSizeOrder(e.target.value);
-                }}
-              >
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </select>
+              <button className="block  w-[40px] h-[40px] text-sm text-black bg-gray-50 rounded-sm border border-gray-900 focus:ring-red-500 hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
+                {size}
+              </button>
             </form>
             <button className="block  w-[40px] h-[40px] text-sm text-black bg-gray-50 rounded-sm border border-gray-900 focus:ring-red-500 hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
               <i className="fa-regular fa-heart"></i>
