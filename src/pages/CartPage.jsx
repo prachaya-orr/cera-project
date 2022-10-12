@@ -25,6 +25,7 @@ function CartPage() {
                   key={index}
                   id={cartItem.id}
                   productId={cartItem.productId}
+                  quantity={cartItem.quantity}
                   productName={cartItem.Product.productName}
                   unitPrice={cartItem.Product.unitPrice}
                   color={cartItem.Product.ProductLists[0].colorValue}

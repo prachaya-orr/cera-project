@@ -1,6 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { createCartApi, getCartApi, deleteCartItemApi } from '../api/cartApi';
+import {
+  createCartApi,
+  getCartApi,
+  deleteCartItemApi,
+  updateCartApi,
+} from '../api/cartApi';
 
 const CartContext = createContext();
 
@@ -18,7 +23,6 @@ function CartContextProvider({ children }) {
           throw new Error();
         }
       });
-      console.log('Note');
       const res = await createCartApi(productId);
       setCartItems((prev) => [...prev, res.data.JoinCartData]);
     } catch (err) {
@@ -38,6 +42,10 @@ function CartContextProvider({ children }) {
     setCartItems(cartItems.filter((cartItem) => id !== cartItem.id));
   };
 
+  const updateCart = async (cartItem) => {
+    updateCartApi(cartItem);
+  };
+
   useEffect(() => {
     try {
       getCart();
@@ -53,6 +61,7 @@ function CartContextProvider({ children }) {
         setCartItems,
         getCart,
         deleteCartItem,
+        updateCart,
       }}
     >
       {children}

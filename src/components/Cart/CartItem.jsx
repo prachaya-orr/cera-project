@@ -3,6 +3,7 @@ import { useCart } from '../../contexts/CartContext';
 
 function CartItem({
   id,
+  quantity: quantityFromCartItem,
   productName,
   unitPrice,
   color,
@@ -10,8 +11,29 @@ function CartItem({
   countStock,
   imageUrl,
 }) {
-  const [quantityOrder, setQuantityOrder] = useState(1);
-  const { deleteCartItem } = useCart();
+  const [quantity, setQuantity] = useState(quantityFromCartItem);
+  const { deleteCartItem, updateCart } = useCart();
+
+  const increaseQuantity = async () => {
+    try {
+      await updateCart({ cartItem: { id, quantity: quantity + 1} });
+      setQuantity(quantity + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const decreaseQuantity = async () => {
+    try {
+      if (quantity > 1) {
+        await updateCart({ cartItem: { id, quantity: quantity - 1} });
+        setQuantity(quantity - 1);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center p-0 gap-6 w-[80vw]">
       <div className="flex flex-col justify-center items-start p-0 h-[288px] gap-[24px] border-b-2 w-[100%] border-gray-400">
@@ -41,20 +63,14 @@ function CartItem({
               <div className="flex flex-row gap-4 items-center">
                 <button
                   className="p-2  bg-slate-200 rounded"
-                  onClick={() => {
-                    if (quantityOrder > 0) {
-                      setQuantityOrder(quantityOrder - 1);
-                    }
-                  }}
+                  onClick={() => decreaseQuantity()}
                 >
                   -
                 </button>
-                <p className="text-lg">{quantityOrder}</p>
+                <p className="text-lg">{quantity}</p>
                 <button
                   className="p-2 bg-slate-200 rounded"
-                  onClick={() => {
-                    setQuantityOrder(quantityOrder + 1);
-                  }}
+                  onClick={() => increaseQuantity()}
                 >
                   +
                 </button>

@@ -5,3 +5,7 @@ export const createCartApi = (productId) =>
 export const getCartApi = () => axios.get('users/cart');
 export const deleteCartItemApi = (cartId) =>
   axios.delete(`users/cart/${cartId}`);
+
+export const updateCartApi = (cartItem) => {
+  axios.patch('users/cart/', cartItem);
+};
