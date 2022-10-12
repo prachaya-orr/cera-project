@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useCart } from '../contexts/CartContext';
 
 function CardProduct({
@@ -40,10 +39,9 @@ function CardProduct({
               <button
                 className="text-center lg-button-medium border-1 p-2 w-[202px] h-[40px] bg-gray-50 focus:ring-blue-500  hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onClick={() => {
-                  addItemToCart({
-                    productId,
-                  });
-                  toast.success('success add to cart');
+                  addItemToCart(
+                    productId
+                  );
                   setIsSelected(true);
                 }}
               >

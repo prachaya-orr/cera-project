@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useCart } from '../../contexts/CartContext';
 
 function CartItem({
+  id,
   productName,
   unitPrice,
   color,
@@ -9,6 +11,7 @@ function CartItem({
   imageUrl,
 }) {
   const [quantityOrder, setQuantityOrder] = useState(1);
+  const { deleteCartItem } = useCart();
   return (
     <div className="flex flex-col items-center p-0 gap-6 w-[80vw]">
       <div className="flex flex-col justify-center items-start p-0 h-[288px] gap-[24px] border-b-2 w-[100%] border-gray-400">
@@ -56,7 +59,12 @@ function CartItem({
                   +
                 </button>
               </div>
-              <div className="text-gray-500 underline">Remove</div>
+              <button
+                className="text-gray-500 underline"
+                onClick={() => deleteCartItem(id)}
+              >
+                Remove
+              </button>
             </div>
           </div>
         </div>

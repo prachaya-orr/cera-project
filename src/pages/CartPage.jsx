@@ -23,6 +23,7 @@ function CartPage() {
               {cartItems?.map((cartItem, index) => (
                 <CartItem
                   key={index}
+                  id={cartItem.id}
                   productId={cartItem.productId}
                   productName={cartItem.Product.productName}
                   unitPrice={cartItem.Product.unitPrice}
