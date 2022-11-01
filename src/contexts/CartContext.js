@@ -1,19 +1,34 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import {
-  createCartApi,
-  getCartApi,
-  deleteCartItemApi,
-  updateCartApi,
-} from '../api/cartApi';
+import * as cartService from '../api/cartApi';
 
 const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   // const [reRender, setRerender] = useState({});
 
-  console.log(cartItems);
+  useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        await getPrice();
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPrice();
+  }, []);
+
+  const getPrice = async () => {
+    try {
+      const res = await cartService.getTotalPriceApi();
+      setTotalPrice(res.data.totalPrice);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // console.log(cartItems);
   const addItemToCart = async (productId) => {
     try {
       console.log(productId);
@@ -23,7 +38,7 @@ function CartContextProvider({ children }) {
           throw new Error();
         }
       });
-      const res = await createCartApi(productId);
+      const res = await cartService.createCartApi(productId);
       setCartItems((prev) => [...prev, res.data.JoinCartData]);
     } catch (err) {
       toast.error('Already In Cart');
@@ -31,19 +46,19 @@ function CartContextProvider({ children }) {
   };
 
   const getCart = async () => {
-    const res = await getCartApi();
+    const res = await cartService.getCartApi();
     if (res.data.JoinCartData) {
       setCartItems([...res.data.JoinCartData]);
     }
   };
 
   const deleteCartItem = async (id) => {
-    await deleteCartItemApi(id);
+    await cartService.deleteCartItemApi(id);
     setCartItems(cartItems.filter((cartItem) => id !== cartItem.id));
   };
 
   const updateCart = async (cartItem) => {
-    updateCartApi(cartItem);
+    await cartService.updateCartApi(cartItem);
   };
 
   useEffect(() => {
@@ -62,6 +77,8 @@ function CartContextProvider({ children }) {
         getCart,
         deleteCartItem,
         updateCart,
+        getPrice,
+        totalPrice,
       }}
     >
       {children}
