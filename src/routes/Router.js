@@ -31,6 +31,7 @@ function Router() {
             <Route path="/aboutCera" element={<AboutCera />} />
             <Route path="/contactUs" element={<ContactUsPage />} />
             <Route path="/users/cart" element={<CartPage />} />
+            <Route path="/checkOut" element={<CartPage />} />
             <Route path="/myWishlist" element={<Wishlist />} />
             <Route path="/account" element={<Account />} />
             <Route path="*" element={<Navigate to="/" />} />

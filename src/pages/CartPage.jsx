@@ -41,7 +41,9 @@ function CartPage() {
               ))}
               <div className='flex flex-row justify-between w-full px-[4.75%] py-1'>
                 {cartItems.length === 0 ? (
-                  <div className='flex justify-center w-full '>No item in cart</div>
+                  <div className='flex justify-center w-full '>
+                    No item in cart
+                  </div>
                 ) : (
                   <>
                     <div className='font-semibold tracking-[-0.02em]'>
@@ -54,9 +56,9 @@ function CartPage() {
                 )}
               </div>
               <div className='flex flex-col gap-2 mt-8'>
-                <button className='bg-black text-white font-bold p-5'>
+                <div className='bg-black text-white font-bold p-5 w-full text-center'>
                   Check Out
-                </button>
+                </div>
                 <Link to={'/shop'} className='text-gray-500 underline'>
                   CONTINUE TO SHOPPING
                 </Link>
