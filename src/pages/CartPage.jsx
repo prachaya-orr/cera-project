@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
 import { useCart } from '../contexts/CartContext';
 
 function CartPage() {
   const { cartItems, totalPrice } = useCart();
-
+  useEffect(() => {
+    console.log(cartItems.length);
+  }, [cartItems]);
   // // const [total, setTotal] = useState();
   // console.log(totalPrice);
   // console.log(cartItems);
@@ -38,11 +40,18 @@ function CartPage() {
                 />
               ))}
               <div className='flex flex-row justify-between w-full px-[4.75%] py-1'>
-                <div className='font-semibold tracking-[-0.02em]'>Total</div>
-
-                <div className='font-semibold tracking-[-0.02em]'>
-                  THB &nbsp;&nbsp;{+totalPrice}
-                </div>
+                {cartItems.length === 0 ? (
+                  <div className='flex justify-center w-full '>No item in cart</div>
+                ) : (
+                  <>
+                    <div className='font-semibold tracking-[-0.02em]'>
+                      Total
+                    </div>
+                    <div className='font-semibold tracking-[-0.02em]'>
+                      THB &nbsp;&nbsp;{+totalPrice}
+                    </div>
+                  </>
+                )}
               </div>
               <div className='flex flex-col gap-2 mt-8'>
                 <button className='bg-black text-white font-bold p-5'>

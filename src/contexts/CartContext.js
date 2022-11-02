@@ -1,24 +1,26 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as cartService from '../api/cartApi';
+import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  // const [reRender, setRerender] = useState({});
-
+  const { user } = useAuth();
   useEffect(() => {
-    const fetchPrice = async () => {
+    const fetchPriceCart = async () => {
       try {
+        
         await getPrice();
+        await getCart();
       } catch (err) {
         console.log(err);
       }
     };
-    fetchPrice();
-  }, []);
+    fetchPriceCart();
+  }, [user]);
 
   const getPrice = async () => {
     try {
