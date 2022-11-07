@@ -2,7 +2,7 @@ import React from 'react';
 import SideBar from '../../components/adminUI/SideBar';
 import EditProductForm from '../../features/product/EditProductForm';
 
-function UpdateProductPage() {
+function EditProductPage() {
   return (
     <div>
       <SideBar />
@@ -13,4 +13,4 @@ function UpdateProductPage() {
   );
 }
 
-export default UpdateProductPage;
+export default EditProductPage;

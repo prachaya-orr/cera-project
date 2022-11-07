@@ -9,12 +9,14 @@ import * as orderService from '../api/orderApi';
 import * as orderItemService from '../api/orderItemApi';
 import * as cartItemService from '../api/cartApi';
 import { toast } from 'react-toastify';
+import { useOrder } from '../contexts/OrderContext';
 
 function CartPage() {
   const { cartItems, totalPrice, getCart } = useCart();
   const [loaded, setLoaded] = useState(false);
   const { user } = useAuth();
   const [charge, setCharge] = useState(null);
+  const { fetchAllOrders } = useOrder();
 
   const navigate = useNavigate();
 
@@ -62,10 +64,10 @@ function CartPage() {
         await cartItemService.clearCartApi();
         getCart();
         toast.success('success createOrder, we will send your product soon.');
+        fetchAllOrders();
         navigate('/');
       },
-      onFormClose: () => {
-      },
+      onFormClose: () => {},
     });
   };
 
