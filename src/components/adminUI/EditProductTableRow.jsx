@@ -14,22 +14,6 @@ function EditProductTableRow({
   isShow,
 }) {
   const [openModal, setOpenModal] = useState(false);
-
-  // const { getOne } = useProduct();
-  // const idEdit = async () => {
-  //   try {
-  //     const res = await adminApi.getOne(productId);
-  //     console.log(res.data);
-  //     const { thisProduct } = res.data;
-  //   } catch (err) {
-  //     toast.error(err.response?.data.message);
-  //   }
-  // };
-
-  // idEdit();
-
-  // const [item, setItem] = useState({});
-
   return (
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <th

@@ -12,7 +12,6 @@ function CartContextProvider({ children }) {
   useEffect(() => {
     const fetchPriceCart = async () => {
       try {
-        
         await getPrice();
         await getCart();
       } catch (err) {
@@ -63,13 +62,13 @@ function CartContextProvider({ children }) {
     await cartService.updateCartApi(cartItem);
   };
 
-  useEffect(() => {
-    try {
-      getCart();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     getCart();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
   return (
     <CartContext.Provider
       value={{

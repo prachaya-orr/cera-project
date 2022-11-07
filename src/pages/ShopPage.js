@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardProduct from '../components/CardProduct';
 import { useCart } from '../contexts/CartContext';
 import { useProduct } from '../contexts/ProductContext';
@@ -6,7 +6,14 @@ import { useProduct } from '../contexts/ProductContext';
 function ShopPage() {
   const { products } = useProduct();
   const { addItemToCart } = useCart();
-  
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <div className='flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]'>
       <div className='flex flex-row items-start py-0 px-[88px] gap-[10px]'>

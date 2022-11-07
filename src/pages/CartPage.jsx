@@ -1,16 +1,106 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
+import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
+import loadOmise from '../utils/scripts/loadOmise';
+import * as paymentService from '../api/paymentApi';
+import * as orderService from '../api/orderApi';
+import * as orderItemService from '../api/orderItemApi';
+import * as cartItemService from '../api/cartApi';
+import { toast } from 'react-toastify';
 
 function CartPage() {
-  const { cartItems, totalPrice } = useCart();
+  const { cartItems, totalPrice, getCart } = useCart();
+  const [loaded, setLoaded] = useState(false);
+  const { user } = useAuth();
+  const [charge, setCharge] = useState(null);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(cartItems.length);
-  }, [cartItems]);
-  // // const [total, setTotal] = useState();
-  // console.log(totalPrice);
-  // console.log(cartItems);
+    loadOmise(() => {
+      setLoaded(true);
+    });
+  }, [charge]);
+
+  let OmiseCard = window.OmiseCard;
+
+  OmiseCard?.configure({
+    publicKey: 'pkey_test_5tipgjhhwdna10j7tym',
+    currency: 'thb',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Cera_Home_Care_Logo.jpg/640px-Cera_Home_Care_Logo.jpg',
+    frameLabel: 'Cera',
+    submitLabel: 'Pay now',
+    buttonLabel: 'Confirm and pay',
+  });
+
+  const creditCardConfigure = () => {
+    OmiseCard.configure({
+      defaultPaymentMehod: 'credit_card',
+      otherPaymentMethods: [],
+    });
+    OmiseCard.configureButton('#credit-card');
+    OmiseCard.attach();
+  };
+
+  const omiseCardHandler = () => {
+    OmiseCard.open({
+      frameDescription: 'by Prachaya',
+      amount: totalPrice * 100,
+      onCreateTokenSuccess: async (token) => {
+        await createCreditCardCharge(
+          user.email,
+          user.firstName,
+          +totalPrice * 100, // unit amount sent to Omise is Satang Unit
+          token
+        );
+        toast.success('success Payment');
+        // await orderService.createOrderApi();
+        await orderItemService.createOrderItemApi();
+        await orderService.updateStatusOrderApi();
+        await cartItemService.clearCartApi();
+        getCart();
+        toast.success('success createOrder, we will send your product soon.');
+        navigate('/');
+      },
+      onFormClose: () => {
+      },
+    });
+  };
+
+  const handleClickConfirmPayment = (e) => {
+    e.preventDefault();
+    creditCardConfigure();
+    omiseCardHandler();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const createCreditCardCharge = async (
+    email,
+    name,
+    amount,
+    token,
+    headers = {
+      'Content-Type': 'application/json',
+    }
+  ) => {
+    try {
+      const res = await paymentService.payment({
+        email,
+        name,
+        amount,
+        token,
+        headers,
+      });
+      console.log(res);
+      setCharge({ amount: res.data.amount.amount, status: res.data.status });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className='flex flex-col items-start p-0 gap-[48px] w-[100vw] mt-12 mb-[108px]'>
       <div className='flex flex-row items-start py-0 px-[88px] gap-[10px]'>
@@ -56,9 +146,20 @@ function CartPage() {
                 )}
               </div>
               <div className='flex flex-col gap-2 mt-8'>
-                <div className='bg-black text-white font-bold p-5 w-full text-center'>
-                  Check Out
-                </div>
+                {loaded ? (
+                  <form>
+                    <button
+                      className='bg-black text-white font-bold p-5 w-full text-center hover:cursor-pointer'
+                      id='credit-card'
+                      onClick={handleClickConfirmPayment}
+                    >
+                      Check Out
+                    </button>
+                  </form>
+                ) : (
+                  ''
+                )}
+
                 <Link to={'/shop'} className='text-gray-500 underline'>
                   CONTINUE TO SHOPPING
                 </Link>

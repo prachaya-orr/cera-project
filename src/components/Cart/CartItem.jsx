@@ -30,10 +30,9 @@ function CartItem({
   const decreaseQuantity = async () => {
     try {
       if (quantity > 1) {
-        const res = await updateCart({
+        await updateCart({
           cartItem: { id, quantity: quantity - 1 },
         });
-        console.log(res);
         setQuantity(quantity - 1);
       }
     } catch (err) {
