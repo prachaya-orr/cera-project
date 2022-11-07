@@ -57,7 +57,6 @@ function CartPage() {
           token
         );
         toast.success('success Payment');
-        // await orderService.createOrderApi();
         await orderItemService.createOrderItemApi();
         await orderService.updateStatusOrderApi();
         await cartItemService.clearCartApi();
